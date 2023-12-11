@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [tasks, setTasks] = useState([]);
+
+    // функция создаёт новый массив задач с уже существующими + новой задачей
+    const createNewTask = () => {
+        let newTeskValue = 'add a new task';
+        setTasks([...tasks, { taskValue: newTeskValue }]);
+    }
+
+    return (
+        <div className='App'>
+            <div className='tasks'>
+                <input value='' />
+                <button onClick={createNewTask}>new task</button>
+                <ul>
+                    {/* перебираются все задачи и выводятся на экран */}
+                    {tasks.map((task, index) => (
+                        <li key={index}>
+                            {task.taskValue}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    );
 }
 
 export default App;
